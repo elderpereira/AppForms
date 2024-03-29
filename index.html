@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Candidato</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>
+</head>
+<body>
+    <h1>Formulário de Candidato</h1>
+    <form id="candidateForm">
+        <!-- Os campos do formulário serão inseridos aqui pelo JavaScript -->
+    </form>
+
+    <script>
+        var schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "Informações Pessoais": {
+                    "type": "object",
+                    "properties": {
+                        "Nome": {"type": "string"},
+                        "Idade": {"type": "integer"},
+                        "Email": {"type": "string", "format": "email"},
+                        "Telefone": {"type": "string"},
+                        "Endereço": {"type": "string"}
+                    },
+                    "required": ["Nome", "Idade", "Email", "Telefone", "Endereço"]
+                },
+                "Objetivos": {"type": "string"},
+                "Carta de Apresentação": {"type": "string"},
+                "Formação Acadêmica": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Grau": {"type": "string"},
+                            "Curso": {"type": "string"},
+                            "Instituição": {"type": "string"},
+                            "Ano de Conclusão": {"type": "integer"}
+                        },
+                        "required": ["Grau", "Curso", "Instituição", "Ano de Conclusão"]
+                    }
+                },
+                "Experiência Profissional": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Cargo": {"type": "string"},
+                            "Empresa": {"type": "string"},
+                            "Período": {"type": "string"},
+                            "Descrição": {"type": "string"}
+                        },
+                        "required": ["Cargo", "Empresa", "Período", "Descrição"]
+                    }
+                },
+                "Habilidades": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "Idiomas": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Idioma": {"type": "string"},
+                            "Nível": {"type": "string"}
+                        },
+                        "required": ["Idioma", "Nível"]
+                    }
+                },
+                "Certificações": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Nome": {"type": "string"},
+                            "Instituição": {"type": "string"},
+                            "Ano de Obtenção": {"type": "integer"}
+                        },
+                        "required": ["Nome", "Instituição", "Ano de Obtenção"]
+                    }
+                }
+            },
+            "required": ["Informações Pessoais", "Formação Acadêmica", "Experiência Profissional", "Habilidades", "Idiomas", "Certificações"]
+        };
+
+
+
+        var form = document.getElementById('candidateForm');
+
+        function createField(container, name, type) {
+            var input;
+            if (name === 'Carta de Apresentação' || name === 'Objetivos' || name.includes('Descrição')) {
+                input = document.createElement('textarea');
+                input.rows = 5;
+            } else {
+                var label = document.createElement('label');
+                var labelText = name;
+                if (labelText.startsWith('Informações Pessoais.')) {
+                    labelText = labelText.replace('Informações Pessoais.', '');
+                }
+                label.textContent = labelText + ':';
+                container.appendChild(label);
+                if (name === 'Ano de Obtenção') {
+                    input = document.createElement('input');
+                    input.type = 'number';
+                    input.min = 1900;
+                    input.max = new Date().getFullYear();
+                    input.value = new Date().getFullYear();
+                } else if (name === 'Período') {
+                    var startDateInput = document.createElement('input');
+                    startDateInput.type = 'date';
+                    startDateInput.name = 'Data de Início';
+                    container.appendChild(startDateInput);
+
+                    var endDateInput = document.createElement('input');
+                    endDateInput.type = 'date';
+                    endDateInput.name = 'Data de Término';
+                    container.appendChild(endDateInput);
+
+                    return; // Não crie um campo de entrada adicional para "Período"
+                } else {
+                    input = document.createElement('input');
+                    input.type = type === 'integer' ? 'number' : 'text';
+                }
+            }
+            input.name = name;
+            container.appendChild(input);
+        }
+
+        function createArrayField(container, name, properties) {
+            var button = document.createElement('button');
+            button.textContent = 'Adicionar ' + name;
+            button.type = 'button';
+            button.onclick = function() {
+                var div = document.createElement('div');
+                div.className = 'line';
+                if (typeof properties === 'object') {
+                    for (var propName in properties) {
+                        createField(div, propName, properties[propName].type);
+                    }
+                } else {
+                    createField(div, name, properties);
+                }
+                var removeButton = document.createElement('button');
+                removeButton.textContent = 'Remover';
+                removeButton.type = 'button';
+                removeButton.onclick = function() {
+                    container.removeChild(div);
+                };
+                div.appendChild(removeButton);
+                container.appendChild(div);
+            };
+            container.appendChild(button);
+        }
+
+        for (var propName in schema.properties) {
+            var prop = schema.properties[propName];
+            var sectionDiv = document.createElement('div');
+            sectionDiv.id = propName;
+            var h2 = document.createElement('h2');
+            h2.textContent = propName;
+            sectionDiv.appendChild(h2);
+            if (prop.type === 'object') {
+                for (var subPropName in prop.properties) {
+                    createField(sectionDiv, propName + '.' + subPropName, prop.properties[subPropName].type);
+                }
+            } else if (prop.type === 'array') {
+                createArrayField(sectionDiv, propName, prop.items.properties);
+            } else {
+                createField(sectionDiv, propName, prop.type);
+            }
+            form.appendChild(sectionDiv);
+        }
+
+        var saveButton = document.createElement('input');
+        saveButton.type = 'button';
+        saveButton.value = 'Salvar';
+        form.appendChild(saveButton);
+
+        saveButton.addEventListener('click', function() {
+            var data = {};
+            var formElements = form.elements;
+            for (var i = 0; i < formElements.length; i++) {
+                if (formElements[i].name) {
+                    data[formElements[i].name] = formElements[i].value;
+                }
+            }
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+            var downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href",     dataStr);
+            downloadAnchorNode.setAttribute("download", "data.json");
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        });
+    </script>
+</body>
+</html>

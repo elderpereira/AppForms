@@ -1,0 +1,73 @@
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #candidateForm {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    #candidateForm label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    #candidateForm input[type="text"],
+    #candidateForm input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    #candidateForm button {
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    #candidateForm input[type="button"] {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Verde */
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #candidateForm input[type="button"]:hover {
+        background-color: #45a049; /* Verde escuro */
+    }
+
+    #candidateForm textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    .line {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    
+    .line button {
+        margin-top: 10px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    input[type="date"] {
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input.invalid {
+        border-color: red;
+    }
