@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>Formulário de Candidato</h1>
+    <input type="file" id="jsonFile" accept=".json" />
+
     <form id="candidateForm">
         <!-- Os campos do formulário serão inseridos aqui pelo JavaScript -->
     </form>
@@ -75,18 +77,37 @@
                     "items": {
                         "type": "object",
                         "properties": {
-                            "Nome": {"type": "string"},
+                            "Certificação": {"type": "string"},
                             "Instituição": {"type": "string"},
                             "Ano de Obtenção": {"type": "integer"}
                         },
-                        "required": ["Nome", "Instituição", "Ano de Obtenção"]
+                        "required": ["Certificação", "Instituição", "Ano de Obtenção"]
                     }
                 }
             },
             "required": ["Informações Pessoais", "Formação Acadêmica", "Experiência Profissional", "Habilidades", "Idiomas", "Certificações"]
         };
 
-
+        document.getElementById('jsonFile').addEventListener('change', function() {
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                var data = JSON.parse(this.result);
+                console.log(JSON.stringify(data, null, 2)); // Imprime todo o conteúdo do JSON
+                for (var key in data) {
+                    var input = document.getElementsByName(key)[0];
+                    if (!input) {
+                        // Se o elemento de entrada não existir, crie-o
+                        input = document.createElement('input');
+                        input.name = key;
+                        // Adicione o novo elemento de entrada ao formulário
+                        document.getElementById('candidateForm').appendChild(input);
+                    }
+                    // Preencha o elemento de entrada com o valor do JSON
+                    input.value = data[key];
+                }
+            };
+            fileReader.readAsText(this.files[0]);
+        }, false);
 
         var form = document.getElementById('candidateForm');
 
@@ -152,6 +173,7 @@
                 };
                 div.appendChild(removeButton);
                 container.appendChild(div);
+                console.log(div)
             };
             container.appendChild(button);
         }
