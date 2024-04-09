@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist DTQ Ronda de Inspeção</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="Form">
+<h1>CHECKLIST DTQ RONDA DE INSPEÇÃO</h1>
+<div id="divPrincipal" style="display: flex; justify-content: space-between;">
+    <div style="flex: 1; margin-right: 10px;">
+        <label for="gerencia">Gerência:</label>
+        <input type="text" id="gerencia"><br>
+
+        <label for="coordenacao">Coordenação:</label>
+        <input type="text" id="coordenacao"><br>
+
+        <label for="equipe">Equipe:</label>
+        <input type="text" id="equipe"><br>
+
+        <label for="firmware">Versão de Firmware:</label>
+        <input type="text" id="firmware">
+    </div>
+
+    <div style="flex: 1; margin-left: 10px;">
+        <label for="sb">SB:</label>
+        <input type="text" id="sb">
+        <label for="data">Data:</label>
+        <input type="date" id="data"><br>
+
+        <label for="horaInicio">Hora início:</label>
+        <input type="time" id="horaInicio">
+        <label for="horaFim">Hora fim:</label>
+        <input type="time" id="horaFim"><br>
+
+        <label for="ronda">Ronda realizada embarcada:</label>
+        <input type="radio" id="rondaSim" name="ronda" value="sim">
+        <label for="rondaSim">Sim</label>
+        <input type="radio" id="rondaNao" name="ronda" value="nao">
+        <label for="rondaNao">Não</label><br>
+        
+        <label for="clima">Clima:</label>
+        <input type="radio" id="climaSeco" name="clima" value="seco">
+        <label for="climaSeco">Seco</label>
+        <input type="radio" id="climaUmido" name="clima" value="umido">
+        <label for="climaUmido">Úmido</label>
+        <input type="radio" id="climaChuva" name="clima" value="chuva">
+        <label for="climaChuva">Chuva</label>
+    </div>
+</div><br>
+<div id="divImagem" style="display: flex; flex-direction: column; align-items: center;">
+    <img id="imgDTQ" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABWUAAAFUCAMAAAEMo56VAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEaUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYsPVgAAABedFJOUwDDsFwIy7j5ZBDTbBjumtuHM3Qg9uOPfL0o65cw85/NOLr76FPCr0iJyna3IvhjpFBYBNpFx2AMz/1oFJbXQoMvcBzy30qLeCTngCzvm9w096M8/6tEhcazu2eoE1RrXF9fAAAACXBIWXMAABcRAAAXEQHKJvM/AAASWUlEQVR4Xu3djWMcxXkH4HOD1Bispi0xKSZuU7eFVqgtcltMgtwYYmhMjQKahOKv///f6M7eqy9blu5jZ3fm/Dxg7czu+hhe/fRq73R3mkEZafY0f9iOaeVS/yEd9RNoyjepE+MGNLba7p/9GNcv17ad4jYUg05bq22FxJZjteU0ttqmvsoAxnZUc1dPaSdGoe7Vdss761m+HzWYR7EdSLe2oqUceLmn+nv+rYg1N3fpFNs2WG05VlvOkKu9FttyBq3tJ7EtZtDVHv1ZDIZxPbatfi+Dge3kL9hnMalef13v64EW5Vb+Vozr19p3nn9oqS+0U9u2mq3VltJaO5CFkqy2jNa+yuSgHKstx2rLKb/aIZ/nPfxqX77Fulf70o95014MhjDwt7Lnab9ktgb9mfF5/bf1RjyMNQ9q8MqWDILVFmS15VhtQUPf+iu3N+xDw+mnMRjG6Wrj20QTinwvgzdc/to684HhdNXc7u4xdpvu3yO1HVAX1a28yfckUzqY7wTI38h6MWc4XU3/s/vzndoO7n6kVmmHF5VV2+Ep6fCipko7vOgDSjs8NS0h8tqJHQzlpKJKOzSlLUZpi4lG24kdDEpZi1HaYpS2GKUtRmmLUdpilLaY9kt7tN1doce4KtWXNu3vXrbIlEtb5/9F3XfFusWlYV9oMaI0e1R9cK9wPT8LqEK5ro9rjm5KX8bodVJ6N0Z16Yv64xf9uEpfXv1przQYFec1KG0xSluM0hajtMUobTHNlnaW3otBrdot7ez6ldfk03q1cE299WpLvNoRAMrovs0e5g8pv4T0pfdOYh3dheLJvxdcNbIylS3ltLI7B9sqO6Cuu+aP85HKAgBn5KuD7EnMGUoU1sXX4NKd7s8n3Z+YM5S7Edn0z7GDoURhtYPBpVvzVqCyQ4vEyuzgoq6uuwYnq4OLkqrs4FS2FJUtJb5xqezglLQUlS0hGkEndjCQKGsndjCQk4Kq7MBUthSVLUVlS1HZUlS2FJUtJS5mO7GDgURZO7GDASlqKSpbisqWorKlqGwpKluKypaisqWobCkqW4rKlqKypahsKSpbSvuV7f4P9rdjXJPqK5vyw8gxvlB3wo7KriDNti9fZHcw/xaA6qRHMahVruolle0SW2tl6y5tX7hLCjtvFXVWtu7U5sI1+nO6HInaG0KbchwaL+3W5zGoS/+FVvPX2/VX19YtlxKivsc+rzQW81Xd6j/W6crCVV3ZmqlsKSpbisqWorKlqGwpKluKypaisqWobCkqW4rKltJqZev/Zc2tVrbadZ1otrLVl7bdytZe2oYr2y3tZoxq9Grh4mcLDE1lS4nkAgAAb6L53YKtk1G+i5B/NW9Kz+YnQGX6u7FdSE8n3cf8u6T3UtrLM6jMPKbbqX/dzHFm88fZUWyhLvNgHqbd00lk9aC/YoDa9JeuKR3GJH+cX87OrxCgJTuuDQAAAICLxONdZ8QBqFVK7+TN7yKsKX3fb6Fa356E9ed581ONlurFJcEZcQBqldKL+aYP6y9klupFWD9K6Yf5tOb3dYROfz1wzu/jCNTJxQD1O59SmaV+MktrZJbWxF2tE7EbqnU+pZ9+GgOols5Ka2SWRsTV6zlxCKr0akJllrrJLK2RWVojs7RGZmmNzNIamaU1Mktr4scI58QhqJuo0hqZpTUyS2tkltbILK2RWVojs7RGZmmNzNIamaU1MktrZJbWyCytkVlaI7O0RmbX1VdwN6Wn8+nyjtJ297G7hbzhajK7rq6Ceyk9P1q5kn1m0+48ulxNZtd1XMH1Mnuy4UoppUcxZCXzrKa038+WlP/yD+kgD2V2UV1kpXZVW2mr+/MsV/F57FpWfiFeH1mZXVj+QpfaVT3vEzvbyclb+dqAJc0rLbW047g7dKnt3JhPWMb1ra3PY/ha3/TlhVY8jOS+xmf5nLdjwpVOr8Jy4a7FmMV9ngv3bkxW82V3CzHkaoq1vvUTJ7PLUKz1yey4FGt9MjsuxVqfzI5LsdYns+NSrPXJ7LgUa30yOy7FWp/Mjkux1iez41Ks9cnsuBRrfTI7LsVan8yOK6X7MWJVMjuy2yn9MYasRmZH1xXsixiyCpkd392uZH+IMcuT2Sn8vivavRizrHUTl3tGuhsTFvYi1y19HDMWdz0X7suYvI7Xg9GWK14PNvvZ1adwkSddcb3udgVfvv32ei8HAwAAAAAAYA3znyKmB/1v9eltz2YH/WDV91WHkvpwdp6fiexWjGSWCs2fLXeYDvNmt/9tE3t9083BzfugLpHL+WYe2e20lSfHh6AqF0Q2pa/yRGSpksjSmAsi68KAms1zuZ128ubM3a+U3P2iSvF41vwBrXlkZ4exLz9uAJU5l86IbPwoIaW9fgaNeCqyAAAAAAAAABPI79Z5XhyAOr0bQT31kzgCdYqgnvouDkCdfhaXAin9S95878qAyh2ldD1vu/6aN/dS+lPeQrXi1y3+00m3vdlvoVZ/Pr+EPSMOQJ0+jaCeej+OQJ0iqKfmrxWHWnUhzZtfpPRiPn2SN1CtiGy3/V3ePHQxS+W6yP42tnnzkV8ITOW6qL7kL+MIVClyelYcgSpFTM+KI1AlEaUxIkv1zodUZKmeyNIYkaUxIktjRJbGiCyN6UJ6XuyHSkVQT8V+qNT5kH766acxgkrpqzRGZGmMyNIYkaUNXVJfFcegQhHS8+IYVChCel4cgwq9GlCRpWoiS2NElsaILI0RWRojsjRGZGmMyNIYkaUxIktjRJbGiCyNEVkaI7I0RmRpTBfQV8UxqFCE9Lw4BhWKkJ4Xx6BmkkpjRJbGiCyNEVkaI7I0RmRpjMjSGJGlMSJLY0SWxogsjRFZGiOyNEZkaYzI0hiRpTEiS2NElsaILI0RWRojsjRGZGmMyNIYkaUxIktjRJbGiCyNEVkaI7I0RmRpjMiuqy/g8620/Xw+X1p8BnwiFiSy68oFfNCVMaUVMzv/DPhELEql1pULmNLubCsdxp4l5RvYzZGPOZdTqXXlAm7nIq5ayXlkV/7rbxyRXddxAXfT0/lgWXEDPhEL6iL7fgxZSUStu5ztt8sT2eXkayiZXcc8avsrJW63uwYW2SXlyMrsio7yPa4+avtpa75rOac3ILIL6yMrsytKaW8vR+3Baok9Ln8M+w1XyXnNf2LKUg5z4Lq05k0n9i6hu544/msiu6BcMZld2W7a2e82OXid+T7K6gsts7Rj3htklmbEtzOZpRUR2T6zKf3Yj1nO14/fi9GK1r6BN8pxZCOzv5lPWMLNrm6PY/w6fXGhGSJLY6LXvsYCp3DqtFg/5sLdjQmLu9XV7XaMV7L2DbxZTiM7e+fWxxK7im/X7ZFr38Ab5UxkWdXaNfRJWILIDkBkxySyAxDZMYnsAER2TCI7AJEdk8gOQGTHJLIDENkxiewARHZMIjsAkR2TyA5AZMcksgMQ2TGJ7ABEdkwiOwCRHZPIDkBkxySyAxDZMYnsAER2TCI7AJEdk8gOQGTHJLIDENkxiewARHZMIjsAkR2TyA5AZMcksgMQ2TGJ7ABEdkxdZG/EkFWJ7JhudJm9F2NWJLKjOuoy632N1iOy43rhcnZdIjuy/5HZNYns2L5N6U4MWYXIju6J9zddi8iO735Kj2LI8kR2Ao9S+iyGLG3dxH0jsiu4ndLf3fwwJizl6zUT91/d/d/7MWZxd7q6+WJfhV+ixOYRWRojsjQmLg9eI/9iy1/GmCXkJ8hcizHL+Pa772MEAAAAAAAAAAAAAMC4+tcZ9Lae7ce+3dhzbHu+e293eyfPfngwnwNwpXkfPbbTN9CLuuyDw5j05ucBcJXcM/vBg6f5QjXt9pMs99q4ip3NfsjHdna75vpgtz/vIA4AcJncMWPYv21/OrlKPdtln+YjRzGZPciz03YMwGvlhhnD2Wz7bPc822XzwwVn2mrfdGMMwCXO9cvcZU8eJDjbZfNZJ5eycdEbYwAuca5f5i77Q4xdywIM4Gy/7C9RTy5ZL3xcdu/w4Gi2l2cn3RiA18sNsx88/2orj1/zHIODfGxn98Hefjyj6+QIAJeY98xjZ58He67LvvR82XS4F/sBuEx0zc7WwVexb+58l+2cvPbr6Fk+3zNmAYrZO9BkAQAAAAAAAAAAAAAAAAB4I7yT38Lgcneux7kALO2z6KWX+DBOBWBpv+wb6Zcxm/1VP/23mM3u3srTT2IGwNK+zn30SUxmsw/z9M7dmM0+ydPHJ1MAlnUzN9KfxGQ2+3me/k1Mout+EBMAlvan3EdvvxWz2T/mafrvmM0+v5OnZ37hLQDL+b++r17qZpwKwNLu/Tp66SV+EecCsLQ/9I30XszmT+769cn0Wp6+ExMAlpf7aPrbmMz+t5/+e8zm0+9Omi4Ay+rbavpVzGZ/cX76QZ59HxMAltZ31fRZzGZv/Wue/kfMZm/dzlNPMwBYVe6iV7kf5wKwrGikl/MDMIAV9V00xgAMTZcFWNc3WYxfpssCrOuyTnrZMQAWcVknvewYAIu4rJNedgyARVzWSS87BsAiLuuklx0DYBF9J71MnAfAKqKXvl6cB8Aqope+XpwHwCp0UoCSdFmAknRZgJJ0WYCSdFmA4fQ9dRFxPgDLiB56tTgfgGUs0kEXOQeAiyzSQRc5B4CLLNJBFzkHgIss0kEXOQeAiyzSQRc5B4CLLNJBFzkHgIss0kEXOQeAiyzSQRc5B4CLLNJBFzkHgIss0kEXOQeAiyzSQRc5B4CLLNJBFzkHgIss0kEXOQeAiyzSQRc5B4CLLNJBFzkHgIss0kEXOQeAi/QddBFxPgDLiB56tTgfgPXoqQAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsgAl6bIAJemyACXpsrzxjrqvge0Yd7bPzWBduixTO4ngVzt9HFM6fNDPx3Kuy/aL0GUZUB/qGMMUjiPYXUOe+KE/MpLTLrt/OP/P67IMqM9UjGEKEcH9btN3t9z0Rs3kSZfdzYOvjmcwjBxoXZYpvRzBvW4+aps77bIHey89fgDrywlP78cEJpAjGMPsQTc9fB6TUZzvq7osA8sJT+mRPstkcgJj2PW4/MOn/ZiMRJelqJzwTJ9lXKfNLOevH8wfm905iklp+VHYgzzQZSmqS1TQZxlVDt1et80/bTrs9+QeuzXeYwXP8woOns8vn5/GTl2WweWgpfcf9Rt9lhE97UM31z9EsBWTXn9KYfkR4HDmmWO6LAPrIzab6bOM7sHxixDm16/PYjbXn1Hc3sFhdyF9cO4xCl2WgZ0kWp8FKKBvrfOhPgswuL6xxlifBRha31Zj3Ik++/jvb9788KexD4CV9U01xr3os72PYx8UdXSzz9utj2K+om/6WwGghIe6LEBBuixASQ/jcYNVfBC3kdL3sQcG0ycrxsduPOn3pms3YgcU9dHjeeJexHx806+AzdVHK8YwmemDOP0K2FCiRRWmD+L0K2BDiRZVmD6I06+ADSVaVGH6IE6/AjaUaFGF6YM4/QrYUKJFFaYP4vQrYEOJFlWYPojTr4ANJVpUYfogTr8CNpRoUYXpgzj9CthQokUVpg/i9CtgQ4kWVZg+iNOvgA0lWlRh+iBOvwI2lGhRhemDOP0K2FCiRRWmD+L0K2BDiRZVmD6I06+ADSVaVGH6IE6/AjaUaFGF6YM4/QrYUKJFFaYP4vQrYEOJFlWYPojTr4ANJVpUYfogTr8CNpRoUYXpgzj9CthQokUVpg/i9CtgQ4kWVZg+iNOvgA0lWlRh+iBOvwI2VB+td2MCU+mDGONpTL8CNtTDxzlb9+/FFKYxfY+bfgVsql/d7tP15G7MYQp9CmM8jelXwOZ6cafP1wcxhQn0GYzxNKZfAZvsiz5g6a9jCqPrExjjaUy/Ajbbe33E7ryIKYysD2CMpzH9Cthwd//Yh+z2UcxhVH38YjyN6VfAxrt3rY/Zo/djDiPqwxfjaUy/At4AN+73Qbt/I+Ywmj56MZ7G9CvgjfD+oz5q1zx9lpH1wYvxBH7/Wb+A5J4c5R19N09b9qOLWkZxdHOeuI9iPrrfzP/7HU+0YQT7EbfsN7EPCvo64pbSt7FnNd/ErQAwvIe6LEBBD+OKdhV3344b+dlbsQeK+jESl655cwPG8FH/nkXp9oSvirn39dbjrfeuxwyKe+fHW7c+/kKPpR2z2f8DThm4vSqpTlcAAAAASUVORK5CYII=" alt="DTQ2">
+
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div style="flex: 1; text-align: left;">
+            <label for="kmFisicoEsquerda">Km Físico:</label>
+            <input type="text" id="kmFisicoEsquerda" style="width: 50px;"><br>
+
+            <label for="kmConfigEsquerda">Km Config:</label>
+            <input type="text" id="kmConfigEsquerda" style="width: 50px;">
+        </div>
+
+        <div style="flex: 1; text-align: center;">
+            <label for="kmFisicoMeio">Km Físico:</label>
+            <input type="text" id="kmFisicoMeio" style="width: 50px;"><br>
+
+            <label for="kmConfigMeio">Km Config:</label>
+            <input type="text" id="kmConfigMeio" style="width: 50px;">
+        </div>
+
+        <div style="flex: 1; text-align: right;">
+            <label for="kmFisicoDireita">Km Físico:</label>
+            <input type="text" id="kmFisicoDireita" style="width: 50px;"><br>
+
+            <label for="kmConfigDireita">Km Config:</label>
+            <input type="text" id="kmConfigDireita" style="width: 50px;">
+        </div>
+    </div>
+</div><br>
+<div id="divTrilhoQuebrado">
+    <label for="boletimVia">Presença de Boletim de VIA:</label>
+    <input type="radio" id="boletimViaSim" name="boletimVia" value="sim">
+    <label for="boletimViaSim">Sim</label>
+    <input type="radio" id="boletimViaNao" name="boletimVia" value="nao">
+    <label for="boletimViaNao">Não</label><br>
+    <label for="trilhoQuebrado">Detectou Trilho Quebrado:</label>
+    <input type="radio" id="trilhoQuebradoSim" name="trilhoQuebrado" value="sim">
+    <label for="trilhoQuebradoSim">Sim</label>
+    <input type="radio" id="trilhoQuebradoNao" name="trilhoQuebrado" value="nao">
+    <label for="trilhoQuebradoNao">Não</label><br>
+
+    <div id="detalhesTrilhoQuebrado" style="display: none;">
+        <label for="kmFratura">Km da fratura:</label>
+        <input type="text" id="kmFratura" style="width: 50px;"><br>
+
+        <label for="causa">Causa:</label>
+        <input type="radio" id="causaPlaca" name="causa" value="sobrePlaca">
+        <label for="causaPlaca">Sobre a placa</label>
+        <input type="radio" id="causaTopado" name="causa" value="topado">
+        <label for="causaTopado">Topado</label>
+        <input type="radio" id="causaAberto" name="causa" value="totalmenteAberto">
+        <label for="causaAberto">Totalmente aberto</label><br><br>
+
+        <label for="observacoes">Observações:</label><br>
+        <textarea id="observacoes" rows="4" cols="50"></textarea><br>
+    </div>
+</div><br>
+<div id="divBondeamento">
+    <label for="Detectoubondeamentorompido">Detectou bondeamento Rompido:</label>
+    <input type="radio" id="sim" name="bondeamento" value="sim">
+    <label for="sim">Sim</label>
+    <input type="radio" id="nao" name="bondeamento" value="nao">
+    <label for="nao">Não</label>
+    <br>
+    <button id="adicionaPontos" style="display: none;">Adiciona pontos</button>
+
+    <div id="divPontos" style="display: none;">
+    </div>
+
+    <div id="divObservacoes" style="display: none;">
+        <label for="observacoes">Observações:</label>
+        <textarea id="txtObservacoes" name="observacoes"></textarea>
+    </div>
+</div><br>
+
+<script>
+document.getElementById('sim').addEventListener('change', function() {
+    document.getElementById('adicionaPontos').style.display = 'block';
+    document.getElementById('divPontos').style.display = 'block';
+    document.getElementById('divObservacoes').style.display = 'block';
+});
+
+document.getElementById('nao').addEventListener('change', function() {
+    document.getElementById('adicionaPontos').style.display = 'none';
+    document.getElementById('divPontos').style.display = 'none';
+    document.getElementById('divObservacoes').style.display = 'none';
+    document.getElementById('divPontos').innerHTML = '';
+    console.log('Antes de limpar: ', document.getElementById('observacoes').value);
+    document.getElementById('txtObservacoes').value = '';
+    console.log('Depois de limpar: ', document.getElementById('txtObservacoes').value);
+});
+
+document.getElementById('adicionaPontos').addEventListener('click', function() {
+    var divPontos = document.getElementById('divPontos');
+
+    var labelKmFratura = document.createElement('label');
+    labelKmFratura.textContent = 'Km da fratura:';
+    var inputKmFratura = document.createElement('input');
+    inputKmFratura.type = 'text';
+    inputKmFratura.name = 'kmFratura';
+
+    var labelCausa = document.createElement('label');
+    labelCausa.textContent = 'Causa:';
+    var selectCausa = document.createElement('select');
+    selectCausa.name = 'causa';
+    ['Vandalismo', 'Desgaste do material', 'Equipe trabalhando no local', 'Solda mal feita'].forEach(function(causa) {
+        var option = document.createElement('option');
+        option.value = causa;
+        option.textContent = causa;
+        selectCausa.appendChild(option);
+    });
+
+    divPontos.appendChild(labelKmFratura);
+    divPontos.appendChild(inputKmFratura);
+    divPontos.appendChild(labelCausa);
+    divPontos.appendChild(selectCausa);
+
+    // Adiciona um elemento <br> após o selectCausa
+    var br = document.createElement('br');
+    divPontos.appendChild(br);
+});
+</script>
+
+<div id="perguntas2">
+<div id="condicaoTala" class="condicaoTala">
+    <label>Condições das talas</label>
+    <input type="radio" name="condicoesDasTalas" value="ok">Ok
+    <input type="radio" name="condicoesDasTalas" value="nok">Nok
+    <select class="causecondicaoTala" style="display: none;">
+        <option>Falta Parafuso</option>
+        <option>Trincada</option>
+        <option>Junta aberta</option>
+        <option>Quebrada</option>
+    </select>
+</div>
+<!-- Condições dos lastros -->
+<div id="condicaoLastro" class="condicaoLastro">
+    <label>Condições dos lastros</label>
+    <input type="radio" name="condicaoLastro" value="ok">Ok
+    <input type="radio" name="condicaoLastro" value="nok">Nok
+    <select class="causecondicaoLastro" style="display: none;">
+        <option>Contaminado</option>
+        <option>Bolsão</option>
+    </select>
+</div>
+<!-- Verificar condições dos cabos de alimentação -->
+<div id="condicaoAlimentacao" class="condicaoAlimentacao">
+    <label>Verificar condições dos cabos de alimentação</label>
+    <input type="radio" name="condicaoAlimentacao" value="ok">Ok
+    <input type="radio" name="condicaoAlimentacao" value="nok">Nok
+    <select class="causecondicaoAlimentacao" style="display: none;">
+        <option>Vandalismo</option>
+        <option>Desgaste do Material</option>
+        <option>Equipe trabalhando no local</option>
+        <option>Solda mal feita</option>
+    </select>
+</div>
+<!-- Verifcar condições dos Jumpers -->
+<div id="condicaoJumper" class="condicaoJumper">
+    <label>Verifcar condições dos Jumpers</label>
+    <input type="radio" name="condicaoJumper" value="ok">Ok
+    <input type="radio" name="condicaoJumper" value="nok">Nok
+    <select class="causecondicaoJumper" style="display: none;">
+        <option>Vandalismo</option>
+        <option>Desgaste do Material</option>
+        <option>Equipe trabalhando no local</option>
+        <option>Solda mal feita</option>
+    </select>
+</div>
+<!-- Verificar presença de tacos -->
+<div id="PresencaTacos" class="PresencaTacos">
+    <label>Verificar presença de tacos</label>
+    <input type="radio" name="PresencaTacos" value="ok">Ok
+    <input type="radio" name="PresencaTacos" value="nok">Nok
+    <select class="causePresencaTacos" style="display: none;">
+        <option>Solto</option>
+        <option>Sem Bondeaemento</option>
+        <option>Com Bondeamento</option>
+    </select>
+</div>
+<!-- SCRIPT PARA RADIOS -->
+<script>
+    var questions = document.querySelectorAll('.PresencaTacos, .condicaoTala, .condicaoLastro, .condicaoAlimentacao, .condicaoJumper');
+    questions.forEach(function(question) {
+        var radios = question.querySelectorAll('input[type="radio"]');
+        var cause = question.querySelector('select');
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (radio.value === 'nok') {
+                    cause.style.display = 'inline-block';
+                } else {
+                    cause.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+
+<!-- Verificar condições da PN -->
+<div id="VPNcondicaoTala" class="VPNquestion">
+    <label>Verificar condições da PN</label>
+    <input type="radio" id="VPNok" name="VPNcondicoesDasTalas" value="ok">Ok
+    <input type="radio" id="VPNnok" name="VPNcondicoesDasTalas" value="nok">Nok<br>
+    <textarea id="VPNobservation" class="VPNobservation" style="display: none;"></textarea>
+</div>
+</div>
+<script>
+var question = document.getElementById('VPNcondicaoTala');
+var radios = question.querySelectorAll('input[type="radio"]');
+var observation = document.getElementById('VPNobservation');
+radios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        if (radio.value === 'nok') {
+            observation.style.display = 'inline-block';
+        } else {
+            observation.style.display = 'none';
+        }
+    });
+});
+</script>
+
+<script>
+    // on start e on change trilho quebrado
+    window.onload = function() {
+        var imgWidth = document.getElementById('imgDTQ').offsetWidth;
+        document.getElementById('Form').style.width = (imgWidth + 100) + 'px';
+    };    
+        document.getElementById('trilhoQuebradoSim').addEventListener('change', function() {
+        document.getElementById('detalhesTrilhoQuebrado').style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('trilhoQuebradoNao').addEventListener('change', function() {
+        document.getElementById('detalhesTrilhoQuebrado').style.display = this.checked ? 'none' : 'block';
+    });
+</script>
+
+<!-- 
+Proximos passos
+Trocar campo de hora e data para data hora alarme
+tirar campo de versão do firmware
+Opção de exportar
+Informar quais campos não foram preenchidos e impedir exportar
+Salvar em cache/cookies gerencia, coordenação, equipe
+
+-->
+
+
+</div>
+</body>
+</html>
