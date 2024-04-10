@@ -3,6 +3,16 @@ body {
     background-color: #f8f8f8; /* Cinza claro */
 }
 
+.container {
+    width: 90%;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    max-width: 100%;
+    min-width: 95%;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -18,11 +28,6 @@ th, td {
 th {
     background-color: #4CAF50; /* Verde */
     color: white;
-}
-
-#candidateForm {
-    width: 600px;
-    margin: 0 auto;
 }
 
 #tabelaCabecalho {
