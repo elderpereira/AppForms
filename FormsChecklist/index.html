@@ -389,53 +389,50 @@
 
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Salvar Checklist</button>
-                <button id="shareWhatsApp" class="btn btn-primary">Compartilhar no WhatsApp</button>
+            <button type="submit" class="btn btn-primary">Salvar Checklist</button>
             </div>
-            
-            <script>
-            // quando o botão de submit for clicado gerar um arquivo json com tudo que tem no formulario
-            document.getElementById('FormChecklist').addEventListener('submit', function(event) {
-                event.preventDefault();
-                var formData = new FormData(this);
-                var object = {};
-                var bondeamentos = [];
-                var bondeamento = {};
-            
-                formData.forEach(function(value, key){
-                    if (key.startsWith('kmBondeamento')) {
-                        bondeamento['kmBondeamento'] = value;
-                    } else if (key.startsWith('causaBondeamento')) {
-                        bondeamento['causaBondeamento'] = value;
-                        bondeamentos.push(bondeamento);
-                        bondeamento = {};
-                    } else {
-                        object[key] = value;
-                    }
-                });
-            
-                object['bondeamentos'] = bondeamentos;
-                var json = JSON.stringify(object);
-            
-                // Cria um novo objeto Blob com o JSON
-                var blob = new Blob([json], {type: "application/json"});
-            
-                // Cria uma URL para o Blob
-                var url = URL.createObjectURL(blob);
-            
-                // Cria um link e faz o download
-                var downloadLink = document.createElement("a");
-                downloadLink.href = url;
-                downloadLink.download = "data.json"; // nome do arquivo
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            
-                // Adiciona o JSON ao botão de compartilhamento do WhatsApp
-                var shareWhatsApp = document.getElementById('shareWhatsApp');
-                shareWhatsApp.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(json);
-            });
-            </script>
+        </form>
+    </div>
+
+    <script>
+    // quando o botão de submit for clicado gerar um arquivo json com tudo que tem no formulario
+    document.getElementById('FormChecklist').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        var object = {};
+        var bondeamentos = [];
+        var bondeamento = {};
+
+        formData.forEach(function(value, key){
+            if (key.startsWith('kmBondeamento')) {
+                bondeamento['kmBondeamento'] = value;
+            } else if (key.startsWith('causaBondeamento')) {
+                bondeamento['causaBondeamento'] = value;
+                bondeamentos.push(bondeamento);
+                bondeamento = {};
+            } else {
+                object[key] = value;
+            }
+        });
+
+        object['bondeamentos'] = bondeamentos;
+        var json = JSON.stringify(object);
+
+        // Cria um novo objeto Blob com o JSON
+        var blob = new Blob([json], {type: "application/json"});
+
+        // Cria uma URL para o Blob
+        var url = URL.createObjectURL(blob);
+
+        // Cria um link e faz o download
+        var downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "data.json"; // nome do arquivo
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    });
+    </script>
 </body>
 </body>
 </html>
