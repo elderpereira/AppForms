@@ -190,7 +190,7 @@
                 var causaSelect = document.createElement('select');
                 causaSelect.name = 'causaBondeamento';
                 causaSelect.className = 'form-control';
-                var opcoes = ['Desgaste do material', 'Equipe trabalhando no local', 'Solda mal feita'];
+                var opcoes = ['Desgaste do material', 'Equipe trabalhando no local', 'Solda mal feita', 'Vandalismo'];
                 opcoes.forEach(function(opcao) {
                     var opcaoElement = document.createElement('option');
                     opcaoElement.value = opcao;
@@ -361,6 +361,38 @@
                 document.getElementById('causaTacos').style.display = show ? 'block' : 'none';
             }
             </script>
+
+            <!-- Condições dos Dormentes -->
+            <div class="form-group" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label style="margin-right: 10px;">Condição dos Dormentes:</label>
+                    <div style="margin-right: 10px;">
+                        <input type="radio" id="DormentesOK" name="CondicaoDormentes" value="ok">
+                        <label for="DormentesOK">OK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="DormentesNOK" name="CondicaoDormentes" value="nok">
+                        <label for="DormentesNOK">N/OK</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Condição das Fixações -->
+            <div class="form-group" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label style="margin-right: 10px;">Condição das Fixações:</label>
+                    <div style="margin-right: 10px;">
+                        <input type="radio" id="FixacoesOK" name="CondicaoFixacoes" value="ok">
+                        <label for="FixacoesOK">OK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="FixacoesNOK" name="CondicaoFixacoes" value="nok">
+                        <label for="FixacoesNOK">N/OK</label>
+                    </div>
+                </div>
+            </div>            
+
+
             <!-- condicoes PN-->
             <div class="form-group" style="display: flex; flex-direction: column;">
                 <div style="display: flex; align-items: center; margin-bottom: 10px;">
@@ -380,12 +412,13 @@
                     <textarea id="observacoesPNText" name="observacoesPN" class="form-control"></textarea>
                 </div>
             </div>
-            
+
             <script>
             function showObservacoesPN(show) {
                 document.getElementById('observacoesPN').style.display = show ? 'block' : 'none';
             }
             </script>
+
 
 
             <div class="form-group">
