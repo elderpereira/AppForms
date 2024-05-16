@@ -412,7 +412,8 @@
 
 
             <div class="form-group">
-            <button type="submit" class="btn btn-primary">Salvar Checklist</button>
+                <button type="submit" class="btn btn-primary">Salvar Checklist</button>
+                <button id="copyButton" type="button" class="btn btn-secondary">Copiar Checklist</button>
             </div>
         </form>
     </div>
@@ -425,6 +426,80 @@
         var bondeamentos = [];
         var bondeamento = {};
 
+        if (!validateRequiredFields(formData)) {
+            return;
+        }
+        
+            formData.forEach(function(value, key){
+                if (key.startsWith('kmBondeamento')) {
+                    bondeamento['kmBondeamento'] = value;
+                } else if (key.startsWith('causaBondeamento')) {
+                    bondeamento['causaBondeamento'] = value;
+                    bondeamentos.push(bondeamento);
+                    bondeamento = {};
+                } else {
+                    object[key] = value;
+                }
+            });
+    
+            object['bondeamentos'] = bondeamentos;
+            var json = JSON.stringify(object);
+    
+            // Cria um novo objeto Blob com o JSON
+            var blob = new Blob([json], {type: "application/json"});
+    
+            // Cria uma URL para o Blob
+            var url = URL.createObjectURL(blob);
+    
+            // Cria um link e faz o download
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.download = "data.json"; // nome do arquivo
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+    </script>
+
+    <script>
+        // Get the "Copiar Checklist" button
+        var copyButton = document.getElementById('copyButton');
+
+        // Add event listener to the button
+        copyButton.addEventListener('click', function() {
+            // Get the form data
+            var formData = new FormData(document.getElementById('FormChecklist'));
+
+            if (!validateRequiredFields(formData)) {
+                return;
+            }
+
+            // Create an object to hold the form data
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+
+            // Convert the object to JSON
+            var json = JSON.stringify(object);
+
+            // Add the "::checklist::" prefix
+            var dataToCopy = "::checklist:: " + json;
+
+            // Copy the data to the clipboard
+            navigator.clipboard.writeText(dataToCopy)
+                .then(function() {
+                    alert('Checklist copiado para a área de transferência');
+                })
+                .catch(function(error) {
+                    console.error('Não foi possível copiar o checklist: ', error);
+                });
+        });
+    </script>
+
+    <script>
+                // Lista de campos obrigatórios
+                function validateRequiredFields(formData) {
         // Lista de campos obrigatórios
         var requiredFields = [
             'SUB',
@@ -460,38 +535,11 @@
         // Se houver campos obrigatórios faltando, mostra um alerta
         if (missingFields.length > 0) {
             alert("Por favor, preencha os seguintes campos obrigatórios:\n" + missingFields.join('\n'));
-            return;
+            return false;
         }
-        
-            formData.forEach(function(value, key){
-                if (key.startsWith('kmBondeamento')) {
-                    bondeamento['kmBondeamento'] = value;
-                } else if (key.startsWith('causaBondeamento')) {
-                    bondeamento['causaBondeamento'] = value;
-                    bondeamentos.push(bondeamento);
-                    bondeamento = {};
-                } else {
-                    object[key] = value;
-                }
-            });
-    
-            object['bondeamentos'] = bondeamentos;
-            var json = JSON.stringify(object);
-    
-            // Cria um novo objeto Blob com o JSON
-            var blob = new Blob([json], {type: "application/json"});
-    
-            // Cria uma URL para o Blob
-            var url = URL.createObjectURL(blob);
-    
-            // Cria um link e faz o download
-            var downloadLink = document.createElement("a");
-            downloadLink.href = url;
-            downloadLink.download = "data.json"; // nome do arquivo
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        });
+
+        return true;
+        }
     </script>
 
     <script>
