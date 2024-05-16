@@ -9,7 +9,10 @@
     <div class="container">
         <h1>Checklist DTQ</h1>
         <form id="FormChecklist">
-            <div class="form-group">
+
+            <!-- vamos começar sem identificação de equipe -->
+
+            <!-- <div class="form-group">
                 <label for="gerencia">Gerência:</label>
                 <input type="text" id="gerencia" name="gerencia" class="form-control">
             </div>
@@ -20,14 +23,15 @@
             <div class="form-group">
                 <label for="equipe">Equipe:</label>
                 <input type="text" id="equipe" name="equipe" class="form-control">
-            </div>
+            </div> -->
+
             <div class="form-group">
-                <label for="sb">SB:</label>
-                <input type="text" id="sb" name="sb" class="form-control">
+                <label for="SUB">SUB:</label>
+                <input type="text" id="SUB" name="SUB" class="form-control" value="$$SUB$$">
             </div>
             <div class="form-group">
                 <label for="dataHoraAlarme">Data Hora Alarme:</label>
-                <input type="datetime-local" id="dataHoraAlarme" name="dataHoraAlarme" class="form-control">
+                <input type="datetime-local" id="dataHoraAlarme" name="dataHoraAlarme" class="form-control" value="$$dataHoraAlarme$$">
             </div>
             <div class="form-group" style="display: flex; align-items: center;">
                 <label for="rondaRealizadaEmbarcada" style="margin-right: 10px;">Ronda realizada embarcada:</label>
@@ -67,20 +71,6 @@
                 <div style="text-align: center;">
                     <input type="text" id="kmFisicoJ2" name="kmFisicoJ2" class="form-control">
                     <label for="kmFisicoJ2" style="margin-top: -5px; font-size: 0.8em;">Km Físico J2:</label>
-                </div>
-            </div>
-            <div class="form-group" style="display: flex; justify-content: space-between;">
-                <div style="text-align: center; margin-right: 10px;">
-                    <input type="text" id="kmConfigJ1" name="kmConfigJ1" class="form-control">
-                    <label for="kmConfigJ1" style="margin-top: -5px; font-size: 0.8em;">Km Config J1:</label>
-                </div>
-                <div style="text-align: center; margin-right: 10px;">
-                    <input type="text" id="kmConfigDTQ" name="kmConfigDTQ" class="form-control">
-                    <label for="kmConfigDTQ" style="margin-top: -5px; font-size: 0.8em;">Km Config DTQ:</label>
-                </div>
-                <div style="text-align: center;">
-                    <input type="text" id="kmConfigJ2" name="kmConfigJ2" class="form-control">
-                    <label for="kmConfigJ2" style="margin-top: -5px; font-size: 0.8em;">Km Config J2:</label>
                 </div>
             </div>
 
@@ -428,7 +418,6 @@
     </div>
 
     <script>
-    // quando o botão de submit for clicado gerar um arquivo json com tudo que tem no formulario
     document.getElementById('FormChecklist').addEventListener('submit', function(event) {
         event.preventDefault();
         var formData = new FormData(this);
@@ -436,36 +425,127 @@
         var bondeamentos = [];
         var bondeamento = {};
 
-        formData.forEach(function(value, key){
-            if (key.startsWith('kmBondeamento')) {
-                bondeamento['kmBondeamento'] = value;
-            } else if (key.startsWith('causaBondeamento')) {
-                bondeamento['causaBondeamento'] = value;
-                bondeamentos.push(bondeamento);
-                bondeamento = {};
-            } else {
-                object[key] = value;
+        // Lista de campos obrigatórios
+        var requiredFields = [
+            'detectouTrilhoQuebrado',
+            'presencaBoletimVIA',
+            'detectadoBondeamentoRompido',
+            'condicoesTalas',
+            'condicoesLastros',
+            'verificarCondicoesCabosAlimentacao',
+            'verificarCondicoesJumpers',
+            'verificarPresencaTacos',
+            'CondicaoDormentes',
+            'CondicaoFixacoes',
+            'verificarCondicoesPN',
+            'sb',
+            'dataHoraAlarme',
+            'rondaRealizadaEmbarcada',
+            'clima',
+            'kmFisicoJ1',
+            'kmFisicoDTQ',
+            'kmFisicoJ2'
+        ];
+
+        // Array para armazenar os campos obrigatórios que estão faltando
+        var missingFields = [];
+
+        // Verifica se todos os campos obrigatórios foram preenchidos
+        for (var field of requiredFields) {
+            if (!formData.has(field) || formData.get(field) == "") {
+                missingFields.push(field);
             }
+        }
+
+        // Se houver campos obrigatórios faltando, mostra um alerta
+        if (missingFields.length > 0) {
+            alert("Por favor, preencha os seguintes campos obrigatórios:\n" + missingFields.join('\n'));
+            return;
+        }
+        
+            formData.forEach(function(value, key){
+                if (key.startsWith('kmBondeamento')) {
+                    bondeamento['kmBondeamento'] = value;
+                } else if (key.startsWith('causaBondeamento')) {
+                    bondeamento['causaBondeamento'] = value;
+                    bondeamentos.push(bondeamento);
+                    bondeamento = {};
+                } else {
+                    object[key] = value;
+                }
+            });
+    
+            object['bondeamentos'] = bondeamentos;
+            var json = JSON.stringify(object);
+    
+            // Cria um novo objeto Blob com o JSON
+            var blob = new Blob([json], {type: "application/json"});
+    
+            // Cria uma URL para o Blob
+            var url = URL.createObjectURL(blob);
+    
+            // Cria um link e faz o download
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.download = "data.json"; // nome do arquivo
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         });
-
-        object['bondeamentos'] = bondeamentos;
-        var json = JSON.stringify(object);
-
-        // Cria um novo objeto Blob com o JSON
-        var blob = new Blob([json], {type: "application/json"});
-
-        // Cria uma URL para o Blob
-        var url = URL.createObjectURL(blob);
-
-        // Cria um link e faz o download
-        var downloadLink = document.createElement("a");
-        downloadLink.href = url;
-        downloadLink.download = "data.json"; // nome do arquivo
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    });
     </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    </script>
+    <script>
+        // Get the URL fragment
+        var fragment = window.location.hash.substring(1);
+
+        // Split the fragment into an array of values
+        var values = fragment.split(';');
+
+        // Assign the values to variables
+        var SUB = values[0];
+        var dataHoraAlarme = values[1];
+        var kmFisicoJ1 = values[2];
+        var kmFisicoDTQ = values[3];
+        var kmFisicoJ2 = values[4];
+
+        // Convert the timestamp to a Date object
+        var date = new Date(dataHoraAlarme * 1000);
+
+        // Format the date as YYYY-MM-DD
+        var dateStr = date.getFullYear() +
+            '-' + ('0' + (date.getMonth() + 1)).slice(-2) +
+            '-' + ('0' + date.getDate()).slice(-2);
+
+        // Format the time as HH:mm
+        var timeStr = ('0' + date.getHours()).slice(-2) +
+            ':' + ('0' + date.getMinutes()).slice(-2);
+
+        // Combine the date and time into a single string
+        dataHoraAlarme = dateStr + 'T' + timeStr;
+
+        // Set the values of the input fields
+        document.getElementById('SUB').value = SUB;
+        document.getElementById('dataHoraAlarme').value = dataHoraAlarme;
+        document.getElementById('kmFisicoJ1').value = kmFisicoJ1;
+        document.getElementById('kmFisicoDTQ').value = kmFisicoDTQ;
+        document.getElementById('kmFisicoJ2').value = kmFisicoJ2;
+
+        // Padrão de url que esta sendo tratado
+        // #SUB;dataHoraAlarme;kmFisicoJ1;kmFisicoDTQ;kmFisicoJ2
+
+    </script>
+
 </body>
 </body>
 </html>
